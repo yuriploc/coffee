@@ -42,7 +42,7 @@ defmodule CoffeeMachine.Socket do
         {:sensor_read, temp},
         %{assigns: %{machine_id: machine_id, machine_type: machine_type, topic: topic}} = socket
       ) do
-    IO.inspect(temp, label: "@ Sensor:")
+    IO.inspect(temp, label: "#{machine_type} sensor")
 
     run_handler(Temperature, %{temp: temp, machine_type: machine_type}, fn
       {:ok, temp} ->

@@ -13,11 +13,7 @@ defmodule CoffeeMachine.Handlers.Temperature do
 
   @impl true
   def perform(%{temp: temp, machine_type: machine_type}, callback) do
-    # Process.sleep(60_000)
-
     max_temp = max_temp(machine_type)
-
-    IO.inspect(max_temp, label: "MAX_TEMP")
 
     if temp <= max_temp do
       callback.({:ok, temp})
