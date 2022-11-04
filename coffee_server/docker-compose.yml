@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  postgres:
+    container_name: coffee_server_dev-db
+    image: postgres
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    # expose:
+    #   - 5432
+    environment:
+      # - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=coffee_server_dev
+
+volumes:
+  dbdata:
+    name: coffee_server_dev-pg-data
