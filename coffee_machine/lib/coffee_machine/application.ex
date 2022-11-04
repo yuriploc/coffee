@@ -15,7 +15,7 @@ defmodule CoffeeMachine.Application do
       # Starts a worker by calling: CoffeeMachine.Worker.start_link(arg)
       # {CoffeeMachine.Worker, arg}
       {Task.Supervisor, name: CoffeeMachineTaskSupervisor},
-      {Registry, name: CoffeeMachine.Registry, keys: :unique},
+      {Registry, name: CoffeeMachine.MachineRegistry, keys: :unique},
       {CoffeeMachine.Sensor, []},
       {CoffeeMachine.Socket, uri: "ws://#{host}:#{port}/#{path}/websocket"}
     ]
