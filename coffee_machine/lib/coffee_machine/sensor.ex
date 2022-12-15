@@ -15,10 +15,10 @@ defmodule CoffeeMachine.Sensor do
   @impl GenServer
   def handle_info(:read_temp, state) do
     temp = :rand.uniform(100)
-    [{socket_pid, _}] = Registry.lookup(CoffeeMachine.MachineRegistry, :machine_socket)
+    [{socket_pid, _}] = Registry.lookup(MachineRegistry, :machine_socket)
 
     Process.send(socket_pid, {:sensor_read, temp}, [])
-    Process.send_after(self(), :read_temp, 3_000)
+    Process.send_after(self(), :read_temp, Enum.random(3_000..10_000))
 
     {:noreply, state}
   end
