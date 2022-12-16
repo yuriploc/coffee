@@ -7,17 +7,14 @@ defmodule CoffeeMachine.Application do
 
   @impl true
   def start(_type, _args) do
-    host = Application.fetch_env!(:coffee_machine, :socket_host)
-    port = Application.fetch_env!(:coffee_machine, :socket_port)
-    path = Application.fetch_env!(:coffee_machine, :socket_path)
-
     children = [
       # Starts a worker by calling: CoffeeMachine.Worker.start_link(arg)
       # {CoffeeMachine.Worker, arg}
       {Task.Supervisor, name: CoffeeMachineTaskSupervisor},
       {Registry, name: CoffeeMachine.MachineRegistry, keys: :unique},
       {CoffeeMachine.Sensor, []},
-      {CoffeeMachine.Socket, uri: "ws://#{host}:#{port}/#{path}/websocket"}
+      # {CoffeeMachine.Socket, uri: CoffeeMachine.MachineConfig.uri()}
+      {CoffeeMachine.Socket.MySocket, uri: CoffeeMachine.MachineConfig.uri()}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

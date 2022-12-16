@@ -1,6 +1,8 @@
 defmodule CoffeeMachine.Sensor do
   use GenServer
 
+  alias CoffeeMachine.MachineRegistry
+
   @spec start_link(keyword()) :: GenServer.on_start()
   def start_link(opts \\ []) do
     GenServer.start_link(__MODULE__, opts, name: __MODULE__)
